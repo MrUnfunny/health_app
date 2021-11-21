@@ -23,4 +23,7 @@ class Constants {
 
   static const String userDataScreenTitle = 'Let\'s get started';
   static const String continu = 'Continue';
+  static const String hello = 'Hello ';
 }
+
+final fakeData = ['water', 'sleep', 'blood pressure', 'calories'];
