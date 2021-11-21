@@ -8,6 +8,12 @@ ThemeData themeData(ThemeData baseTheme) {
     primaryColor: ThemeColors.mainColor,
     backgroundColor: ThemeColors.backgroundColor,
     scaffoldBackgroundColor: ThemeColors.backgroundColor,
+    colorScheme: baseTheme.colorScheme.copyWith(
+      secondary: ThemeColors.lightMainAccentColor,
+    ),
+    iconTheme: baseTheme.iconTheme.copyWith(
+      color: ThemeColors.lightMainAccentColor,
+    ),
     textTheme: TextTheme(
       headline1: TextStyle(
         color: ThemeColors.textPrimaryColor,
@@ -35,14 +41,16 @@ ThemeData themeData(ThemeData baseTheme) {
         fontFamily: Config.defaultFontFamily,
       ),
       subtitle1: TextStyle(
-        color: ThemeColors.textPrimaryColor,
+        color: ThemeColors.grey,
         fontFamily: Config.defaultFontFamily,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
       ),
       subtitle2: TextStyle(
-        color: ThemeColors.textPrimaryColor,
+        color: ThemeColors.grey,
         fontFamily: Config.defaultFontFamily,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
+        fontSize: 14,
       ),
       bodyText1: TextStyle(
         color: ThemeColors.textPrimaryColor,
