@@ -20,4 +20,7 @@ class Constants {
       'Enter Email Id for resetting password';
   static const String authenticationError =
       'Please enter valid Email and Password';
+
+  static const String userDataScreenTitle = 'Let\'s get started';
+  static const String continu = 'Continue';
 }

@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import '../../repository/auth_repository.dart';
+import '../../repository/firestore_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -16,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.email,
         event.password,
       );
-      emit(const AuthLoggedInState());
+      emit(const AuthRegisteredState());
     } catch (e) {
       emit(AuthFailedState(e.toString()));
     }
@@ -27,7 +29,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(const AuthStartState());
       await _authRepository.signInWithCredentials(event.email, event.password);
-      emit(const AuthLoggedInState());
+
+      if (FirestoreRepository().checkUserData()) {
+        emit(const AuthLoggedInState());
+      } else {
+        emit(const AuthRegisteredState());
+      }
     } catch (e) {
       emit(AuthFailedState(e.toString()));
     }

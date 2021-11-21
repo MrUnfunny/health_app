@@ -22,8 +22,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthLoggedInState) {
-          Navigator.pushReplacementNamed(context, RoutePaths.homeScreen);
+        if (state is AuthRegisteredState) {
+          Navigator.pushReplacementNamed(context, RoutePaths.userDataScreen);
         }
 
         if (state is AuthFailedState) {

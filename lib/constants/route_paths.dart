@@ -6,4 +6,5 @@ class RoutePaths {
   static const detailScreen = '/detail';
   static const formDetail = '/formDetail';
   static const loadingScreen = '/loading';
+  static const userDataScreen = '/userDataScreen';
 }

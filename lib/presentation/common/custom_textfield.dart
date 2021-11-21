@@ -65,9 +65,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         visibleIcon = !visibleIcon;
                       });
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.visibility,
-                      color: ThemeColors.lightMainAccentColor,
                     ),
                   )
                 : GestureDetector(
@@ -78,7 +77,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     },
                     child: const Icon(
                       Icons.visibility_off,
-                      // color: Theme.of(context).colorScheme.secondary,
                     ),
                   )
             : null,

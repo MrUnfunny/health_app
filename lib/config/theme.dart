@@ -12,7 +12,7 @@ ThemeData themeData(ThemeData baseTheme) {
       secondary: ThemeColors.lightMainAccentColor,
     ),
     iconTheme: baseTheme.iconTheme.copyWith(
-      color: ThemeColors.lightMainAccentColor,
+      color: baseTheme.colorScheme.secondary,
     ),
     textTheme: TextTheme(
       headline1: TextStyle(
