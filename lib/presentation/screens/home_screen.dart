@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -49,54 +49,70 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 36)),
                 SliverFillRemaining(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 18,
-                    crossAxisSpacing: 18,
-                    childAspectRatio: 0.7,
-                    children: [
-                      IndicatorTile(
-                        title: 'Steps',
-                        icon: const Icon(FontAwesomeIcons.running),
-                        widget: Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
-                            child: CircularPercentIndicator(
-                              radius: 100,
-                              lineWidth: 10.0,
-                              percent: 0.75,
-                              center: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: '7500',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          ?.copyWith(
-                                            color: ThemeColors.backgroundColor,
-                                          ),
-                                    ),
-                                    TextSpan(
-                                      text: '\nSteps',
-                                      style:
-                                          Theme.of(context).textTheme.subtitle2,
-                                    ),
-                                  ],
+                  child: StaggeredGridView.countBuilder(
+                    crossAxisCount: 4,
+                    itemCount: Constants.indicators.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        IndicatorTile(
+                      title: Constants.indicators[index].name,
+                      icon: Constants.indicators[index].icon,
+                      widget: Container(
+                        child: !Constants.indicators[index].isShort
+                            ? CircularPercentIndicator(
+                                radius: 100,
+                                lineWidth: 10.0,
+                                percent: 0.75,
+                                center: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: Constants
+                                            .indicators[index].shortData
+                                            .toStringAsFixed(2),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            ?.copyWith(
+                                              color: Constants.indicators[index]
+                                                      .isFilled
+                                                  ? ThemeColors.backgroundColor
+                                                  : ThemeColors.black,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            '\n${Constants.indicators[index].unit}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle2,
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                                circularStrokeCap: CircularStrokeCap.round,
+                                progressColor:
+                                    Constants.indicators[index].isFilled
+                                        ? ThemeColors.backgroundColor
+                                        : ThemeColors.mainColor,
+                                backgroundColor:
+                                    Constants.indicators[index].isFilled
+                                        ? ThemeColors.grey
+                                        : ThemeColors.backgroundColor,
+                              )
+                            : Text(
+                                '${Constants.indicators[index].shortData} ${Constants.indicators[index].unit}',
+                                textAlign: TextAlign.left,
                               ),
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor: ThemeColors.white,
-                              backgroundColor: ThemeColors.grey,
-                            ),
-                          ),
-                        ),
-                        fillColor: true,
                       ),
-                      // IndicatorTile(),
-                      // IndicatorTile(),
-                      // IndicatorTile(),
-                    ],
+                      isFilled: Constants.indicators[index].isFilled,
+                      fillColor: Constants.indicators[index].color,
+                    ),
+                    staggeredTileBuilder: (int index) =>
+                        (Constants.indicators[index].isShort)
+                            ? const StaggeredTile.count(2, 1.25)
+                            : const StaggeredTile.count(2, 2.5),
+                    mainAxisSpacing: 24.0,
+                    crossAxisSpacing: 18.0,
                   ),
                 ),
               ],

@@ -1,4 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../config/colors.dart';
+
+import '../models/indicator.dart';
+
 class Constants {
+  static final List<Indicator> indicators = [
+    Indicator(
+      name: 'Steps',
+      icon: FontAwesomeIcons.running,
+      isShort: false,
+      isFilled: true,
+      shortData: 7995,
+      unit: 'Steps',
+      color: ThemeColors.backgroundColor,
+      data: {},
+    ),
+    Indicator(
+      name: 'Water',
+      icon: FontAwesomeIcons.tint,
+      isShort: false,
+      shortData: 0.75,
+      unit: 'Litres',
+      color: Colors.blue,
+      data: {},
+    ),
+    Indicator(
+      name: 'Calories',
+      icon: FontAwesomeIcons.fire,
+      isShort: true,
+      shortData: 452.21,
+      unit: 'Kcal',
+      color: ThemeColors.lightMainAccentColor,
+      data: {},
+    ),
+    Indicator(
+      name: 'Heart',
+      icon: FontAwesomeIcons.heart,
+      isShort: false,
+      shortData: 86,
+      unit: 'bpm',
+      color: const Color(0xffee8e92),
+      data: {},
+    ),
+    Indicator(
+      name: 'Sleep',
+      icon: FontAwesomeIcons.bed,
+      isShort: true,
+      shortData: 6.65,
+      unit: 'hours',
+      color: ThemeColors.mainColor,
+      data: {},
+    ),
+  ];
+
   static const String appName = 'Acme Health';
 
   static const String signUpButtonText = 'SIGN UP';
@@ -25,5 +80,3 @@ class Constants {
   static const String continu = 'Continue';
   static const String hello = 'Hello ';
 }
-
-final fakeData = ['water', 'sleep', 'blood pressure', 'calories'];
