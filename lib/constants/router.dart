@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../models/indicator.dart';
 import '../presentation/screens/detail_screen.dart';
 import '../presentation/screens/formdetail_screen.dart';
+import '../presentation/screens/formdetailinput_screen.dart';
 import '../presentation/screens/home_screen.dart';
 import '../presentation/screens/loading_screen.dart';
 import '../presentation/screens/main_screen.dart';
@@ -38,6 +40,10 @@ Route<dynamic> generateRoutes(RouteSettings settings) {
 
         case RoutePaths.userDataScreen:
           return const UserDataScreen();
+
+        case RoutePaths.formDetailInputScreen:
+          return FormDetailInputScreen(
+              indicator: settings.arguments as Indicator);
 
         default:
           return const LoadingScreen();

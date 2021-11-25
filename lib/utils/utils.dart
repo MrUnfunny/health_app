@@ -48,3 +48,12 @@ class Username {
 String capitalize(String str) {
   return str.toUpperCase().substring(0, 1) + str.toLowerCase().substring(1);
 }
+
+Map<String, dynamic> toMapWithStringKeys(Map<dynamic, dynamic> m) {
+  final res = <String, dynamic>{};
+  m.forEach((key, value) {
+    res[key.toString()] = value;
+  });
+
+  return res;
+}

@@ -1,0 +1,160 @@
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../bloc/firestore/firestore_bloc.dart';
+import '../../config/colors.dart';
+import '../../constants/constants.dart';
+import '../../models/indicator.dart';
+
+class FormDetailInputScreen extends StatefulWidget {
+  final Indicator indicator;
+
+  const FormDetailInputScreen({required this.indicator, Key? key})
+      : super(key: key);
+
+  @override
+  State<FormDetailInputScreen> createState() => _FormDetailInputScreenState();
+}
+
+class _FormDetailInputScreenState extends State<FormDetailInputScreen> {
+  TextEditingController dateController = TextEditingController(
+    text: DateTime.now().toString(),
+  );
+
+  double? name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        leading: BackButton(
+          color: ThemeColors.black,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              if (name == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      Constants.indicatorDataNotFound + widget.indicator.name,
+                    ),
+                  ),
+                );
+              } else {
+                context
+                    .read<FirestoreBloc>()
+                    .add(FirestoreAddIndicatorDataEvent(
+                      widget.indicator.copyWith(
+                        data: {DateTime.parse(dateController.text): name!},
+                      ),
+                    ));
+              }
+            },
+            child: const Text(
+              Constants.save,
+            ),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 8.0,
+          horizontal: 18,
+        ),
+        child: SafeArea(
+            child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              Constants.add + widget.indicator.name,
+              style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 36,
+            ),
+            DetailFormField(
+              text: widget.indicator.name,
+              textInputType: TextInputType.number,
+              onChanged: (String val) {
+                setState(() {
+                  name = double.parse(val);
+                });
+              },
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            Text(
+              Constants.date,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            DateTimePicker(
+              controller: dateController,
+              decoration: InputDecoration(
+                hintText: Constants.date,
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: ThemeColors.grey,
+                  ),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: ThemeColors.grey,
+                  ),
+                ),
+                hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      color: ThemeColors.grey,
+                    ),
+              ),
+              autocorrect: false,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(DateTime.now().year),
+              lastDate: DateTime.now(),
+              dateLabelText: 'Date',
+              validator: (val) {},
+              onSaved: (val) {},
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+          ],
+        )),
+      ),
+    );
+  }
+}
+
+class DetailFormField extends StatelessWidget {
+  final String text;
+  final TextInputType? textInputType;
+  final void Function(String)? onChanged;
+  const DetailFormField({
+    Key? key,
+    required this.text,
+    required this.onChanged,
+    this.textInputType,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        TextFormField(
+          keyboardType: textInputType ?? TextInputType.text,
+          onChanged: onChanged,
+        ),
+      ],
+    );
+  }
+}

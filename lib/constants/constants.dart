@@ -79,4 +79,11 @@ class Constants {
   static const String userDataScreenTitle = 'Let\'s get started';
   static const String continu = 'Continue';
   static const String hello = 'Hello ';
+  static const String save = 'Save ';
+  static const String date = 'Date';
+  static const String note = 'Note';
+
+  static const String formDetailTitle = 'what would you like to add?';
+  static const String add = 'Add your ';
+  static const String indicatorDataNotFound = 'Please enter valid ';
 }

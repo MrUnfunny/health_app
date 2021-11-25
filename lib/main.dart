@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/auth/auth_bloc.dart';
+import 'bloc/firestore/firestore_bloc.dart';
 import 'bloc/userdata/userdata_bloc.dart';
 import 'config/theme.dart';
 import 'constants/constants.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => UserdataBloc()),
+        BlocProvider(create: (context) => FirestoreBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -58,4 +58,26 @@ class Indicator {
   String toString() {
     return 'Indicator(name: $name, icon: $icon, isShort: $isShort, isFilled: $isFilled, color: $color, shortData: $shortData, unit: $unit, data: $data)';
   }
+
+  Indicator copyWith({
+    String? name,
+    IconData? icon,
+    bool? isShort,
+    bool? isFilled,
+    Color? color,
+    double? shortData,
+    String? unit,
+    Map<DateTime, double>? data,
+  }) {
+    return Indicator(
+      name: name ?? this.name,
+      icon: icon ?? this.icon,
+      isShort: isShort ?? this.isShort,
+      isFilled: isFilled ?? this.isFilled,
+      color: color ?? this.color,
+      shortData: shortData ?? this.shortData,
+      unit: unit ?? this.unit,
+      data: data ?? this.data,
+    );
+  }
 }
