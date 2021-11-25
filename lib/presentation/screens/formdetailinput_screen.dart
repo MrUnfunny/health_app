@@ -44,13 +44,23 @@ class _FormDetailInputScreenState extends State<FormDetailInputScreen> {
                   ),
                 );
               } else {
-                context
-                    .read<FirestoreBloc>()
-                    .add(FirestoreAddIndicatorDataEvent(
-                      widget.indicator.copyWith(
-                        data: {DateTime.parse(dateController.text): name!},
+                var time = DateTime.parse(dateController.text);
+                context.read<FirestoreBloc>().add(
+                      FirestoreAddIndicatorDataEvent(
+                        widget.indicator.copyWith(
+                          data: {
+                            DateTime(
+                              time.year,
+                              time.month,
+                              time.day,
+                              DateTime.now().hour,
+                              DateTime.now().second,
+                              DateTime.now().millisecond,
+                            ): name!
+                          },
+                        ),
                       ),
-                    ));
+                    );
               }
             },
             child: const Text(
@@ -79,10 +89,11 @@ class _FormDetailInputScreenState extends State<FormDetailInputScreen> {
             ),
             DetailFormField(
               text: widget.indicator.name,
+              unit: widget.indicator.unit,
               textInputType: TextInputType.number,
               onChanged: (String val) {
                 setState(() {
-                  name = double.parse(val);
+                  name = double.tryParse(val) ?? 0.0;
                 });
               },
             ),
@@ -131,11 +142,13 @@ class _FormDetailInputScreenState extends State<FormDetailInputScreen> {
 
 class DetailFormField extends StatelessWidget {
   final String text;
+  final String unit;
   final TextInputType? textInputType;
   final void Function(String)? onChanged;
   const DetailFormField({
     Key? key,
     required this.text,
+    required this.unit,
     required this.onChanged,
     this.textInputType,
   }) : super(key: key);
@@ -150,9 +163,24 @@ class DetailFormField extends StatelessWidget {
           text,
           style: Theme.of(context).textTheme.bodyText1,
         ),
-        TextFormField(
-          keyboardType: textInputType ?? TextInputType.text,
-          onChanged: onChanged,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: [
+            Expanded(
+              child: TextFormField(
+                keyboardType: textInputType ?? TextInputType.text,
+                onChanged: onChanged,
+              ),
+            ),
+            const SizedBox(
+              width: 36,
+            ),
+            Text(
+              unit,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ],
         ),
       ],
     );

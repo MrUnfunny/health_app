@@ -14,7 +14,7 @@ class FirestoreBloc extends Bloc<FirestoreEvent, FirestoreState> {
     try {
       emit(FirestoreStartedState());
       _firestoreRepository.submitIndicatorData(event.indicator);
-      emit(FirestoreSuccessState());
+      emit(FirestoreSuccessState(event.indicator));
     } catch (e) {
       emit(FirestoreFailureState(e.toString()));
     }
@@ -22,6 +22,7 @@ class FirestoreBloc extends Bloc<FirestoreEvent, FirestoreState> {
 
   FirestoreBloc() : super(FirestoreInitial()) {
     on<FirestoreAddIndicatorDataEvent>(
-        _mapFirestoreAddIndicatorDataEventToState);
+      _mapFirestoreAddIndicatorDataEventToState,
+    );
   }
 }

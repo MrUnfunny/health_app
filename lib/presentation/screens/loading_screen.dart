@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../bloc/homescreen/homescreen_bloc.dart';
 import '../../config/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/route_paths.dart';
@@ -18,14 +20,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2)).then(
-      (value) => FirebaseAuth.instance.currentUser == null
-          ? Navigator.pushReplacementNamed(context, RoutePaths.mainScreen)
-          : FirestoreRepository().checkUserData()
-              ? Navigator.pushReplacementNamed(context, RoutePaths.homeScreen)
-              : Navigator.pushReplacementNamed(
-                  context,
-                  RoutePaths.userDataScreen,
-                ),
+      (value) {
+        context.read<HomescreenBloc>().add(HomescreenGetDataEvent());
+        return FirebaseAuth.instance.currentUser == null
+            ? Navigator.pushReplacementNamed(context, RoutePaths.mainScreen)
+            : FirestoreRepository().checkUserData()
+                ? Navigator.pushReplacementNamed(context, RoutePaths.homeScreen)
+                : Navigator.pushReplacementNamed(
+                    context,
+                    RoutePaths.userDataScreen,
+                  );
+      },
     );
   }
 
