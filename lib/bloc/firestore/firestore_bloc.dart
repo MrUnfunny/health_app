@@ -20,9 +20,25 @@ class FirestoreBloc extends Bloc<FirestoreEvent, FirestoreState> {
     }
   }
 
+  Future<void> _mapFirestoreGetIndicatorDataEventToState(
+      FirestoreGetIndicatorDataEvent event,
+      Emitter<FirestoreState> emit) async {
+    try {
+      emit(FirestoreStartedState());
+      final data = await _firestoreRepository.getIndicatorData(event.indicator);
+      emit(FirestoreGetIndicatorDataSuccessState(data));
+    } catch (e) {
+      emit(FirestoreGetIndicatorDataFailureState(e.toString()));
+    }
+  }
+
   FirestoreBloc() : super(FirestoreInitial()) {
     on<FirestoreAddIndicatorDataEvent>(
       _mapFirestoreAddIndicatorDataEventToState,
+    );
+
+    on<FirestoreGetIndicatorDataEvent>(
+      _mapFirestoreGetIndicatorDataEventToState,
     );
   }
 }

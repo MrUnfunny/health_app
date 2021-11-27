@@ -86,4 +86,7 @@ class Constants {
   static const String formDetailTitle = 'what would you like to add?';
   static const String add = 'Add your ';
   static const String indicatorDataNotFound = 'Please enter valid ';
+  static const String today = 'Today';
+
+  static const String emptyIndicatorData = 'Please Add some data to continue';
 }

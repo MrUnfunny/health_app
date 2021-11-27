@@ -48,18 +48,34 @@ class HomeScreen extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: Text(
-                    DateFormat('MMM d, yyyy').format(DateTime.now()),
-                    style: Theme.of(context).textTheme.subtitle1,
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Text(
-                    Constants.hello +
-                        FirebaseAuth.instance.currentUser!.displayName!,
-                    style: Theme.of(context).textTheme.headline4,
-                    textAlign: TextAlign.left,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            DateFormat('MMM d, yyyy').format(DateTime.now()),
+                            style: Theme.of(context).textTheme.subtitle1,
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            Constants.hello +
+                                FirebaseAuth.instance.currentUser!.displayName!,
+                            style: Theme.of(context).textTheme.headline4,
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: () =>
+                            context.read<AuthBloc>().add(AuthLogOutEvent()),
+                        icon: const Icon(
+                          Icons.logout,
+                        ),
+                        color: ThemeColors.textPrimaryColor,
+                      ),
+                    ],
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 36)),
@@ -71,8 +87,7 @@ class HomeScreen extends StatelessWidget {
                         BlocBuilder<HomescreenBloc, HomescreenState>(
                       builder: (context, state) {
                         return IndicatorTile(
-                          title: Constants.indicators[index].name,
-                          icon: Constants.indicators[index].icon,
+                          indicator: Constants.indicators[index],
                           widget: Container(
                             child: !Constants.indicators[index].isShort
                                 ? CircularPercentIndicator(
@@ -134,8 +149,6 @@ class HomeScreen extends StatelessWidget {
                                     textAlign: TextAlign.left,
                                   ),
                           ),
-                          isFilled: Constants.indicators[index].isFilled,
-                          fillColor: Constants.indicators[index].color,
                         );
                       },
                     ),

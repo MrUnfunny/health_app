@@ -11,7 +11,6 @@ class CustomNavBar extends StatefulWidget {
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
-  int activeTab = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,38 +20,13 @@ class _CustomNavBarState extends State<CustomNavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           NavItems(
-            icon: Icon(
-              Icons.dashboard_outlined,
-              color: activeTab == 0 ? ThemeColors.black : ThemeColors.grey,
-            ),
-            onTap: () {
-              setState(() {
-                activeTab = 0;
-              });
-            },
-          ),
-          NavItems(
             isLarge: true,
             icon: Icon(
               Icons.add,
               color: ThemeColors.backgroundColor,
             ),
             onTap: () {
-              setState(() {
-                activeTab = 1;
-              });
               Navigator.pushNamed(context, RoutePaths.formDetail);
-            },
-          ),
-          NavItems(
-            icon: Icon(
-              Icons.settings,
-              color: activeTab == 2 ? ThemeColors.black : ThemeColors.grey,
-            ),
-            onTap: () {
-              setState(() {
-                activeTab = 2;
-              });
             },
           ),
         ],

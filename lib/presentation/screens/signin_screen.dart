@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health/bloc/homescreen/homescreen_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
@@ -26,6 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
           Navigator.pushReplacementNamed(context, RoutePaths.userDataScreen);
         }
         if (state is AuthLoggedInState) {
+          context.read<HomescreenBloc>().add(HomescreenGetDataEvent());
           Navigator.pushReplacementNamed(context, RoutePaths.homeScreen);
         }
         if (state is AuthFailedState) {

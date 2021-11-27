@@ -1,64 +1,66 @@
 import 'package:flutter/material.dart';
+
 import '../../config/colors.dart';
+import '../../constants/route_paths.dart';
+import '../../models/indicator.dart';
 
 class IndicatorTile extends StatelessWidget {
-  final bool isFilled;
-  final Color? fillColor;
-  final String title;
-  final IconData icon;
+  final Indicator indicator;
   final Widget widget;
 
   const IndicatorTile({
     Key? key,
-    required this.title,
-    required this.icon,
     required this.widget,
-    this.fillColor,
-    this.isFilled = false,
-  })  : assert(isFilled || fillColor != null),
-        super(key: key);
+    required this.indicator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: 24,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1,
-          color: ThemeColors.grey,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, RoutePaths.detailScreen,
+            arguments: indicator);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 24,
         ),
-        color: isFilled ? Theme.of(context).primaryColor : null,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                      color: isFilled
-                          ? ThemeColors.white
-                          : ThemeColors.textPrimaryColor,
-                    ),
-                textAlign: TextAlign.left,
-              ),
-              Icon(
-                icon,
-                color: isFilled
-                    ? ThemeColors.backgroundColor.withOpacity(0.6)
-                    : fillColor,
-              ),
-            ],
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+            color: ThemeColors.grey,
           ),
-          widget,
-        ],
+          color: indicator.isFilled ? Theme.of(context).primaryColor : null,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  indicator.name,
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        color: indicator.isFilled
+                            ? ThemeColors.white
+                            : ThemeColors.textPrimaryColor,
+                      ),
+                  textAlign: TextAlign.left,
+                ),
+                Icon(
+                  indicator.icon,
+                  color: indicator.isFilled
+                      ? ThemeColors.backgroundColor.withOpacity(0.6)
+                      : indicator.color,
+                ),
+              ],
+            ),
+            widget,
+          ],
+        ),
       ),
     );
   }

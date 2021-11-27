@@ -1,3 +1,8 @@
+import 'dart:developer';
+
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
+
 class Email {
   Email(this.emailAddress);
 
@@ -54,6 +59,39 @@ Map<String, dynamic> toMapWithStringKeys(Map<dynamic, dynamic> m) {
   m.forEach((key, value) {
     res[key.toString()] = value;
   });
+
+  return res;
+}
+
+Map<DateTime, double> parseDateTimeMap(Map<dynamic, dynamic> m) {
+  final res = <DateTime, double>{};
+
+  m.forEach((key, value) {
+    res[DateTime.parse(key.toString())] = value as double;
+  });
+
+  return res;
+}
+
+List<BarChartGroupData> parseAndSortBarChartGroupData(
+    Map<DateTime, double> map) {
+  var res = map.entries
+      .map(
+        (e) => BarChartGroupData(
+          x: e.key.day,
+          barRods: [
+            BarChartRodData(
+              y: e.value,
+              width: 40,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(5),
+              ),
+            ),
+          ],
+        ),
+      )
+      .toList()
+    ..sort((a, b) => a.x.compareTo(b.x));
 
   return res;
 }

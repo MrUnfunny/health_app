@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health/presentation/screens/settings_screen.dart';
 
 import '../models/indicator.dart';
 import '../presentation/screens/detail_screen.dart';
@@ -36,14 +37,20 @@ Route<dynamic> generateRoutes(RouteSettings settings) {
           return const FormDetailScreen();
 
         case RoutePaths.detailScreen:
-          return const DetailScreen();
+          return DetailScreen(
+            indicator: settings.arguments as Indicator,
+          );
 
         case RoutePaths.userDataScreen:
           return const UserDataScreen();
 
         case RoutePaths.formDetailInputScreen:
           return FormDetailInputScreen(
-              indicator: settings.arguments as Indicator);
+            indicator: settings.arguments as Indicator,
+          );
+
+        case RoutePaths.settingsScreen:
+          return const SettingsScreen();
 
         default:
           return const LoadingScreen();

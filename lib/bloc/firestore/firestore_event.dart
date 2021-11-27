@@ -12,3 +12,8 @@ class FirestoreAddIndicatorDataEvent extends FirestoreEvent {
 
   const FirestoreAddIndicatorDataEvent(this.indicator);
 }
+
+class FirestoreGetIndicatorDataEvent extends FirestoreEvent {
+  final Indicator indicator;
+  const FirestoreGetIndicatorDataEvent(this.indicator);
+}

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health/bloc/indicatordata/indicatordata_bloc.dart';
 
 import 'bloc/auth/auth_bloc.dart';
 import 'bloc/firestore/firestore_bloc.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => UserdataBloc()),
         BlocProvider(create: (context) => FirestoreBloc()),
+        BlocProvider(create: (context) => IndicatordataBloc()),
         BlocProvider(
             create: (context) =>
                 HomescreenBloc(BlocProvider.of<FirestoreBloc>(context))),

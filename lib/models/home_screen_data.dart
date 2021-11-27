@@ -23,11 +23,11 @@ class HomeScreenData extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'steps': steps,
-      'water': water,
-      'calories': calories,
-      'sleep': sleep,
-      'heart': heart,
+      'steps': steps.toString(),
+      'water': water.toString(),
+      'calories': calories.toString(),
+      'sleep': sleep.toString(),
+      'heart': heart.toString(),
     };
   }
 

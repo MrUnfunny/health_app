@@ -1,5 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health/constants/route_paths.dart';
 import 'package:provider/provider.dart';
 
 import '../../bloc/firestore/firestore_bloc.dart';
@@ -29,7 +31,7 @@ class _FormDetailInputScreenState extends State<FormDetailInputScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: BackButton(
+        leading: CupertinoNavigationBarBackButton(
           color: ThemeColors.black,
         ),
         actions: [
@@ -61,10 +63,13 @@ class _FormDetailInputScreenState extends State<FormDetailInputScreen> {
                         ),
                       ),
                     );
+
+                Navigator.pushReplacementNamed(context, RoutePaths.homeScreen);
               }
             },
             child: const Text(
               Constants.save,
+              style: TextStyle(color: Colors.black54),
             ),
           ),
         ],

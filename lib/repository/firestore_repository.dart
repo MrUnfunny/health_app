@@ -16,6 +16,7 @@ class FirestoreRepository {
   }
 
   Future<HomeScreenData> getHomeScreenData() async {
+    var cnt = 0;
     var m = <String, num>{};
     final data =
         firestoreInstance.collection(FirebaseAuth.instance.currentUser!.uid);
@@ -24,13 +25,20 @@ class FirestoreRepository {
       var temp = 0.0;
       var doc = await data.doc(element.name).get();
 
-      doc.data()?.entries.forEach((element) {
-        if (DateTime.parse(element.key).day == DateTime.now().day) {
-          temp += element.value;
+      doc.data()?.entries.forEach((e) {
+        if (DateTime.parse(e.key).day == DateTime.now().day) {
+          temp += e.value;
+          if (element.name.toLowerCase() == 'heart') {
+            cnt++;
+          }
         }
       });
 
-      m[element.name.toLowerCase()] = temp;
+      if (element.name.toLowerCase() == 'heart') {
+        m[element.name.toLowerCase()] = temp / cnt;
+      } else {
+        m[element.name.toLowerCase()] = temp;
+      }
     }
     return HomeScreenData.fromMap(m);
   }
@@ -76,5 +84,20 @@ class FirestoreRepository {
           toMapWithStringKeys(indicator.data),
           SetOptions(merge: true),
         );
+  }
+
+  Future<Map<DateTime, double>> getIndicatorData(Indicator indicator) async {
+    var m = <DateTime, double>{};
+    final doc = await firestoreInstance
+        .collection(FirebaseAuth.instance.currentUser!.uid)
+        .doc(indicator.name)
+        .get();
+    doc.data()?.entries.forEach((element) {
+      m[DateTime.parse(element.key)] = element.value as double;
+    });
+
+    m = parseDateTimeMap(m);
+
+    return m;
   }
 }
