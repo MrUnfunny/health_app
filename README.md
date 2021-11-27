@@ -54,15 +54,12 @@ flutter build apk
 | [**firebase_analytics**](https://pub.dev/packages/firebase_analytics) | For google analytics             |
 | [**fl_chart**](https://pub.dev/packages/fl_chart)                     | To show bar graphs               |
 | [**equatable**](https://pub.dev/packages/equatable)                   | To simplify equality comparisons |
-| [**crypto_font_icons**](https://pub.dev/packages/crypto_font_icons)   | To show cryptocoin logo as icons |
 
 ### App Overview
 
-This app mainly keeps track of all crypto incomes and expenses. User can add incomes and expenses in five different cryptocurrencies(Bitcoin, Ethereum, Tether, DogeCoin and Ripple).
+This app aims to keep track of your health indicators such as weight, sleep, average heart rate, calories burnt etc.
 
-In HomeScreen, all expenses are visualized in a line chart and crypto specific expenses are shown in line chart in expenses screen. On starting app, it checks whether user is logged in or not and based on it, it shows home screen or main screen showing options to either sign in or sign up with a new account.
-
-**NOTE:** All crypto incomes and expenses are converted to USD by fetching latest price to provide better overview.
+This app is built in a modular way. So, new indicators can be easily added just by creating a new Indicator model and adding it to the Constant data of the app. Here, Firebase is used for authentication as well as a backend for storing data. Firebase Analytics has also been implemented to analyse app data via firebase.
 
 ### App Structure
 
