@@ -8,11 +8,13 @@ You can directly install the apk file from [releases](https://github.com/MrUnfun
 
 ## App Screens
 
-<p><img src="screenshots/main_screen.png" width="270" height="540" alt="history_screen"/>
-<img src="screenshots/sign_up.png" width="270" height="540" alt="favorites"/>
-<p><img src="screenshots/sign_in.png" width="270" height="540" alt="home_screen_without_history"/>
-<img src="screenshots/home_screen.png" width="270" height="540" alt="home_screen_with_history"/></p>
-<img src="screenshots/expense_overview.png" width="270" height="540" alt="settings"/>
+<p><img src="screenshots/welcome.png" width="270" height="540" alt="welcome"/>
+<img src="screenshots/signup.png" width="270" height="540" alt="sign_up"/>
+<p><img src="screenshots/signin.png" width="270" height="540" alt="sign_in"/>
+<img src="screenshots/home.png" width="270" height="540" alt="home"/></p>
+<img src="screenshots/detail.png" width="270" height="540" alt="detail"/>
+<img src="screenshots/add_data.png" width="270" height="540" alt="add_data"/></p>
+<img src="screenshots/add_data_initial.png" width="270" height="540" alt="add_data_initial"/>
 </p>
 
 #### Building from source
