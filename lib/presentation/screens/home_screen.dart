@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/homescreen/homescreen_bloc.dart';
 import '../../config/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/route_paths.dart';
+import '../../utils/analytics.dart';
 import '../common/bottom_navbar.dart';
 import '../common/indicator_tiles.dart';
 
@@ -25,6 +27,9 @@ class HomeScreen extends StatelessWidget {
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is AuthLoggedOutState) {
+                Provider.of<AnalyticService>(context, listen: false)
+                    .logSignOut();
+
                 Navigator.pushReplacementNamed(context, RoutePaths.mainScreen);
               }
             },

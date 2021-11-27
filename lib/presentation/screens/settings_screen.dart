@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../common/bottom_navbar.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);

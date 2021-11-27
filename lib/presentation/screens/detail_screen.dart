@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health/constants/route_paths.dart';
 
 import '../../bloc/homescreen/homescreen_bloc.dart';
 import '../../config/colors.dart';
 import '../../constants/constants.dart';
+import '../../constants/route_paths.dart';
 import '../../models/indicator.dart';
 import '../common/line_chart.dart';
 

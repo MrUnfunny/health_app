@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health/presentation/screens/settings_screen.dart';
 
 import '../models/indicator.dart';
 import '../presentation/screens/detail_screen.dart';
@@ -8,6 +7,7 @@ import '../presentation/screens/formdetailinput_screen.dart';
 import '../presentation/screens/home_screen.dart';
 import '../presentation/screens/loading_screen.dart';
 import '../presentation/screens/main_screen.dart';
+import '../presentation/screens/settings_screen.dart';
 import '../presentation/screens/signin_screen.dart';
 import '../presentation/screens/signup_screen.dart';
 import '../presentation/screens/userdata_screen.dart';

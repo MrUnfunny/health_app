@@ -1,13 +1,14 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health/constants/route_paths.dart';
 import 'package:provider/provider.dart';
 
 import '../../bloc/firestore/firestore_bloc.dart';
 import '../../config/colors.dart';
 import '../../constants/constants.dart';
+import '../../constants/route_paths.dart';
 import '../../models/indicator.dart';
+import '../../utils/analytics.dart';
 
 class FormDetailInputScreen extends StatefulWidget {
   final Indicator indicator;
@@ -63,6 +64,8 @@ class _FormDetailInputScreenState extends State<FormDetailInputScreen> {
                         ),
                       ),
                     );
+                Provider.of<AnalyticService>(context, listen: false)
+                    .logIndicatorAdded(widget.indicator.name);
 
                 Navigator.pushReplacementNamed(context, RoutePaths.homeScreen);
               }

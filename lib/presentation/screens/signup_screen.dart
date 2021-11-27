@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import '../../bloc/auth/auth_bloc.dart';
 import '../../config/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/route_paths.dart';
+import '../../utils/analytics.dart';
 import '../../utils/utils.dart';
 import '../common/custom_textfield.dart';
 
@@ -23,6 +25,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthRegisteredState) {
+          Provider.of<AnalyticService>(context, listen: false).setUserId(
+            FirebaseAuth.instance.currentUser!.uid,
+          );
+          Provider.of<AnalyticService>(context, listen: false).logSignUp();
+
           Navigator.pushReplacementNamed(context, RoutePaths.userDataScreen);
         }
 

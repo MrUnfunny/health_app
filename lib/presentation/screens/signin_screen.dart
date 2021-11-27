@@ -1,12 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health/bloc/homescreen/homescreen_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/homescreen/homescreen_bloc.dart';
 import '../../config/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/route_paths.dart';
+import '../../utils/analytics.dart';
 import '../../utils/utils.dart';
 import '../common/custom_textfield.dart';
 
@@ -28,6 +30,10 @@ class _SignInScreenState extends State<SignInScreen> {
         }
         if (state is AuthLoggedInState) {
           context.read<HomescreenBloc>().add(HomescreenGetDataEvent());
+          Provider.of<AnalyticService>(context, listen: false).logSignIn();
+          Provider.of<AnalyticService>(context, listen: false).setUserId(
+            FirebaseAuth.instance.currentUser!.uid,
+          );
           Navigator.pushReplacementNamed(context, RoutePaths.homeScreen);
         }
         if (state is AuthFailedState) {

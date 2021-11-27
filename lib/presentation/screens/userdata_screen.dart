@@ -7,6 +7,7 @@ import '../../config/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/route_paths.dart';
 import '../../models/userdata.dart';
+import '../../utils/analytics.dart';
 
 class UserDataScreen extends StatelessWidget {
   const UserDataScreen({Key? key}) : super(key: key);
@@ -20,6 +21,9 @@ class UserDataScreen extends StatelessWidget {
     return BlocListener<UserdataBloc, UserdataState>(
       listener: (context, state) {
         if (state is UserdataSubmittedState) {
+          Provider.of<AnalyticService>(context, listen: false)
+              .logUserDetailsAdded();
+
           Navigator.pushReplacementNamed(context, RoutePaths.homeScreen);
         }
       },
