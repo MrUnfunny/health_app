@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/MrUnfunny/health_app/compare/v1.0.0...v1.1.0) (2021-11-28)
+
+
+### Features
+
+* improved navigation and fixed UI bug ([51d410a](https://github.com/MrUnfunny/health_app/commit/51d410afe19ad0e2a52c47825e1ce90162f90009))
+
 # 1.0.0 (2021-11-27)
 
 
