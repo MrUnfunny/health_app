@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Email {
   Email(this.emailAddress);
@@ -92,4 +94,25 @@ List<BarChartGroupData> parseAndSortBarChartGroupData(
     ..sort((a, b) => a.x.compareTo(b.x));
 
   return res;
+}
+
+Future<bool> onWillPop(
+  DateTime currentBackPressTime,
+  void Function() backPressUpdateCallBack,
+  BuildContext context,
+) {
+  var now = DateTime.now();
+
+  if (now.difference(currentBackPressTime) > const Duration(seconds: 2)) {
+    backPressUpdateCallBack();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Press back again to exit'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+    return Future.value(false);
+  }
+  SystemNavigator.pop();
+  return Future.value(true);
 }

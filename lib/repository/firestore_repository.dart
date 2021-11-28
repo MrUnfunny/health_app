@@ -35,7 +35,11 @@ class FirestoreRepository {
       });
 
       if (element.name.toLowerCase() == 'heart') {
-        m[element.name.toLowerCase()] = (temp / cnt).roundToDouble();
+        var val = (temp / cnt).roundToDouble();
+        if (val.isNaN) {
+          val = 0;
+        }
+        m[element.name.toLowerCase()] = val;
       } else {
         m[element.name.toLowerCase()] = temp;
       }

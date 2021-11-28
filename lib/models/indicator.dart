@@ -10,6 +10,7 @@ class Indicator {
   final Color color;
   final double shortData;
   final String unit;
+  final double maxDailyValue;
   final Map<DateTime, double> data;
 
   Indicator({
@@ -20,6 +21,7 @@ class Indicator {
     required this.shortData,
     required this.data,
     required this.unit,
+    required this.maxDailyValue,
     this.isFilled = false,
   });
 
@@ -33,6 +35,7 @@ class Indicator {
       'shortData': shortData,
       'unit': unit,
       'data': data,
+      'maxDailyValue': maxDailyValue,
     };
   }
 
@@ -45,6 +48,7 @@ class Indicator {
       color: Color(map['color']),
       shortData: map['shortData'],
       unit: map['unit'],
+      maxDailyValue: map['maxDailyValue'],
       data: Map<DateTime, double>.from(map['data']),
     );
   }
@@ -67,6 +71,7 @@ class Indicator {
     Color? color,
     double? shortData,
     String? unit,
+    double? maxDailyValue,
     Map<DateTime, double>? data,
   }) {
     return Indicator(
@@ -78,6 +83,7 @@ class Indicator {
       shortData: shortData ?? this.shortData,
       unit: unit ?? this.unit,
       data: data ?? this.data,
+      maxDailyValue: maxDailyValue ?? this.maxDailyValue,
     );
   }
 }

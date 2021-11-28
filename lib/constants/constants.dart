@@ -14,6 +14,7 @@ class Constants {
       shortData: 7995,
       unit: 'Steps',
       color: ThemeColors.backgroundColor,
+      maxDailyValue: 10000,
       data: {},
     ),
     Indicator(
@@ -23,6 +24,7 @@ class Constants {
       shortData: 0.75,
       unit: 'Litres',
       color: Colors.blue,
+      maxDailyValue: 5,
       data: {},
     ),
     Indicator(
@@ -32,6 +34,7 @@ class Constants {
       shortData: 452.21,
       unit: 'Kcal',
       color: ThemeColors.lightMainAccentColor,
+      maxDailyValue: 4000,
       data: {},
     ),
     Indicator(
@@ -41,6 +44,7 @@ class Constants {
       shortData: 86,
       unit: 'bpm',
       color: const Color(0xffee8e92),
+      maxDailyValue: 80,
       data: {},
     ),
     Indicator(
@@ -49,6 +53,7 @@ class Constants {
       isShort: true,
       shortData: 6.65,
       unit: 'hours',
+      maxDailyValue: 8,
       color: ThemeColors.mainColor,
       data: {},
     ),
